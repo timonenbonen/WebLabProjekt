@@ -1,0 +1,21 @@
+nav {
+  background: #007bff;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout-btn {
+  padding: 8px 15px;
+  background: #ff4b5c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.logout-btn:hover {
+  background: #d43f52;
+}

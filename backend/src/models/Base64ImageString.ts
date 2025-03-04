@@ -1,0 +1,1 @@
+export interface Base64ImageString extends String {}

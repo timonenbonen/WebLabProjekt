@@ -1,0 +1,21 @@
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: guestbook_postgres
+    environment:
+      POSTGRES_USER: guestbook
+      POSTGRES_PASSWORD: guestbook
+      POSTGRES_DB: guestbook
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - guestbook_network
+
+networks:
+  guestbook_network:
+
+volumes:
+  postgres_data:

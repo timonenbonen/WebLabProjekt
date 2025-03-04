@@ -1,0 +1,35 @@
+<div class="guestbook-container" *ngIf="guestbook; else loading">
+  <h2>Guestbook: {{ guestbook.name }}</h2>
+  <p>Design ID: {{ guestbook.designId }}</p>
+
+  <p>
+    Share Link:
+    <a [href]="fullShareLink" target="_blank">
+      {{ fullShareLink }}
+    </a>
+    <button (click)="copyShareLink()">📋 Copy Link</button>
+  </p>
+
+  <h3>Song Cards</h3>
+  <button (click)="exportToPDF()">📄 Download PDF</button>
+  <div #pdfContent class="song-cards-container">
+    <div *ngFor="let song of guestbook?.songCards" class="song-card">
+      <!-- First Half: Song Details -->
+      <div class="song-info">
+        <div class="artist">{{ song.spotifyArtists.join(', ') }}</div>
+        <div class="year">{{ song.spotifyReleaseYear }}</div>
+        <div class="title">{{ song.spotifySongName }}</div>
+      </div>
+
+      <!-- Second Half: Personal Message -->
+      <div class="song-message" [class.empty]="!song.personalMessage">
+        <p *ngIf="song.personalMessage; else emptyMessage">{{ song.personalMessage }}</p>
+        <ng-template #emptyMessage></ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Loading guestbook details...</p>
+</ng-template>

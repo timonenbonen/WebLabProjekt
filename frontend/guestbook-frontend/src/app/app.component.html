@@ -1,0 +1,5 @@
+<nav *ngIf="isLoggedIn()">
+  <button class="logout-btn" routerLink="/login" (click)="logout()">Logout</button>
+</nav>
+<router-outlet></router-outlet>
+

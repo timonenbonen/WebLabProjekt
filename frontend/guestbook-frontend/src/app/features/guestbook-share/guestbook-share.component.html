@@ -1,0 +1,49 @@
+<div class="guestbook-container" *ngIf="guestbook; else loading">
+  <h2>Guestbook: {{ guestbook.name }}</h2>
+  <p>Design ID: {{ guestbook.designId }}</p>
+  <p>
+    Share Link:
+    <a [href]="'/guestbook-share/' + guestbook.shareLink" target="_blank">
+      {{ guestbook.shareLink }}
+    </a>
+  </p>
+
+  <div class="search-section">
+    <label for="guestName">Your Name (Required)</label>
+    <input id="guestName" type="text" [(ngModel)]="guestName" placeholder="Your Name" required />
+
+    <label for="searchQuery">Search for a song</label>
+    <input id="searchQuery" type="text" [(ngModel)]="searchQuery" placeholder="Enter song name" />
+    <button (click)="searchSongs()">🔍 Search</button>
+  </div>
+
+  <div *ngIf="searchResults.length > 0">
+    <h3>Search Results</h3>
+    <ul>
+      <li *ngFor="let song of searchResults">
+        <strong>{{ song.name }}</strong>
+        <br>
+        Artist(s): {{ song.artist.join(', ') }}
+        <br>
+        Release Year: {{ song.releaseYear }}
+        <br>
+        <button (click)="selectSong(song)">🎵 Select</button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="selectedSong">
+    <h3>Selected Song</h3>
+    <p><strong>{{ selectedSong.name }}</strong> by {{ selectedSong.artist.join(', ') }}</p>
+
+    <label for="personalMessage">Personal Message (Optional)</label>
+    <textarea id="personalMessage" [(ngModel)]="personalMessage" placeholder="Write a message for the couple"></textarea>
+
+    <button (click)="addSong()">➕ Add Song</button>
+  </div>
+
+
+</div>
+
+<ng-template #loading>
+  <p>Loading guestbook details...</p>
+</ng-template>

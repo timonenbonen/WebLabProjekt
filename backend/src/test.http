@@ -1,0 +1,92 @@
+### add guestbook entry
+POST {{baseurl}}/guestbook/add
+Content-Type: application/json
+
+{
+  "guestName": "Test Guest",
+  "spotifySongId": "65gHs4yzO6y2Z0ZdLtDoEu",
+  "guestbookId": 17,
+  "personalMessage" : ""
+}
+
+
+### search song
+GET {{baseurl}}/guestbook/search?query=shape
+
+
+### register user
+POST {{baseurl}}/user/register
+Content-Type: application/json
+
+{
+  "displayname": "Test User",
+  "username": "TestUser2",
+  "password": "TestPassword"
+}
+
+### login user
+POST {{baseurl}}/user/login
+Authorization: Bearer testsecret
+Content-Type: application/json
+
+{
+  "username": "TestUser",
+  "password": "TestPassword2"
+}
+
+> {%
+    client.global.set("token", response.body.token);
+%}
+
+
+### update password
+PUT {{baseurl}}/user/update
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "username": "TestUser",
+  "oldPassword": "TestPassword",
+  "newPassword": "TestPassword2"
+
+}
+
+### create guestbook
+POST {{baseurl}}/user/createGuestbook
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Guestbook1111",
+  "designId": 1
+
+}
+
+### fetch Overview of guestbooks
+GET {{baseurl}}/user/guestbookOverview
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+
+### fetch details from guestbook
+GET {{baseurl}}/user/guestbook/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### update design
+PUT {{baseurl}}/user/changeDesign
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "guestbookId": 1,
+  "designId": 1
+}
+
+
+### find all designs
+GET {{baseurl}}/user/designOverview
+Authorization: Bearer {{token}}
+
+### get Guestbook by sharelink
+GET http://localhost:3000/guestbook/by-share-link/e8c6fc125ec4bf7a132ec96bbb7fed47

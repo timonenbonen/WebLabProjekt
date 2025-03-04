@@ -1,0 +1,36 @@
+<div class="dashboard-container">
+  <!-- Top Left: Display User Name -->
+  <div class="user-info">
+    <h3>Welcome, {{ displayName }}</h3>
+  </div>
+
+  <!-- Section: My Guestbooks -->
+  <div class="guestbook-section">
+    <h2>My Guestbooks</h2>
+
+    <div class="create-section">
+      <input type="text" [(ngModel)]="newGuestbookName" placeholder="Enter guestbook name" />
+
+      <!-- Temporary dropdown for selecting a design -->
+      <select [(ngModel)]="selectedDesignId">
+        <option [value]="1">Design 1</option>
+        <option [value]="2">Design 2</option>
+        <option [value]="3">Design 3</option>
+      </select>
+
+      <button class="create-btn" (click)="createGuestbook()">+ Create</button>
+    </div>
+
+    <ul *ngIf="guestbooks.length > 0; else noGuestbooks">
+      <li *ngFor="let guestbook of guestbooks">
+        <a [routerLink]="['/guestbook', guestbook.id]">
+          {{ guestbook.name }}
+        </a>
+      </li>
+    </ul>
+
+    <ng-template #noGuestbooks>
+      <p>No guestbooks found.</p>
+    </ng-template>
+  </div>
+</div>
